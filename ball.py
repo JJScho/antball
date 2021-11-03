@@ -4,11 +4,12 @@ import consts
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,name, rect:pygame.Rect, momemtum:pygame.Vector2):
         super(Ball, self).__init__()
+        self.name = name
         self.image = pygame.image.load('ball.png')
-        self.rect = pygame.Rect(300, 300, 32, 32)
-        self.momentum = pygame.Vector2(5, 1)
+        self.rect = rect
+        self.momentum = momemtum
 
 
 
@@ -32,7 +33,8 @@ class Ball(pygame.sprite.Sprite):
             self.rect.right = consts.SCREEN_WIDTH
             self.bounce()
 
-
+    def get_name(self):
+        return self.name
 
     def bounce(self, horizontal=True):
         energy_loss = -0.9
