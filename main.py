@@ -42,8 +42,13 @@ while True:
     for ball in ball_group:
         if not len((pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self))) == 0:
             print(f'collision found ')
-            print(pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)[0].get_name())
-            print(f'{ball.name=}')
+            ball2 = pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)[0]
+
+            tempmom = ball.momentum.reflect(ball2.momentum)
+            ball2.momentum.reflect_ip(ball.momentum)
+            ball.momentum = tempmom
+
+            pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)[0].bounce()
 
 
     textsurface = myfont.render(f'{ball_1.rect=}, {ball_1.momentum=}', False, (0, 0, 0))
