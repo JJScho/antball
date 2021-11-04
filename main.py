@@ -43,11 +43,9 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LSHIFT:
                 flipper_1.flipping = True
-                print(f'{flipper_1.flipping=}')
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LSHIFT:
+            else:
                 flipper_1.flipping = False
-                print(f'{flipper_1.flipping=}')
+
 
     screen.fill(c.WHITE)
 
