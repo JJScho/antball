@@ -11,18 +11,18 @@ class Flipper(pygame.sprite.Sprite):
         self.flipping = False
         self.speed = 1
         self.angle = 0
-        self.max_rotation = 20
+        self.max_rotation = -40
         self.flipping=False
 
 
 
     def update(self):
         if self.flipping:
-            if self.angle < self.max_rotation:
+            if self.angle > self.max_rotation:
                 self.angle = self.angle - 1
-                topright = self.rect.topright
+                center = self.rect.center
                 self.image = pygame.transform.rotate(image, self.angle)
-                self.rect.topright = topright
+                self.rect.center = center
             else:
                 self.image = pygame.transform.rotate(image, self.angle)
         else:

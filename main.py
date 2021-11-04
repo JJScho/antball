@@ -44,6 +44,7 @@ while True:
             if event.key == pygame.K_LSHIFT:
                 flipper_1.flipping = True
             else:
+                print('geen')
                 flipper_1.flipping = False
 
 
