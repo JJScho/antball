@@ -12,13 +12,13 @@ pygame.font.init()  # you have to call this at the start,
 # if you want to use this module.
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
 
-screen = pygame.display.set_mode((c.SCREEN_WIDTH, c.SCREEN_WIDE))
+screen = pygame.display.set_mode((c.SCREEN_WIDTH, c.SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 screen.fill(c.BLACK)
 
 ball_1 = ball.Ball('Jerry',pygame.Rect( 300, 300, 24, 24), pygame.Vector2(15, 1))
-ball_2 = ball.Ball('Fred', pygame.Rect(799, 799, 24, 24), pygame.Vector2(0, 0))
-ball_3 = ball.Ball('Hank', pygame.Rect(5, 5, 24, 24), pygame.Vector2(80, 80))
+ball_2 = ball.Ball('Fred', pygame.Rect(799, 799, 24, 24), pygame.Vector2(20, 20))
+ball_3 = ball.Ball('Hank', pygame.Rect(5, 5, 24, 24), pygame.Vector2(40, 40))
 
 ball_group = pygame.sprite.Group()
 
@@ -40,15 +40,16 @@ while True:
     ball_group.update()
 
     for ball in ball_group:
-        if not len((pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self))) == 0:
-            print(f'collision found ')
-            ball2 = pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)[0]
+        coll = pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)
+        if not len(coll) == 0:
+            ball2 = coll[0]
 
             tempmom = ball.momentum.reflect(ball2.momentum)
             ball2.momentum.reflect_ip(ball.momentum)
             ball.momentum = tempmom
 
-            pygame.sprite.spritecollide(ball, ball_group, False, collide_if_not_self)[0].bounce()
+
+
 
 
     textsurface = myfont.render(f'{ball_1.rect=}, {ball_1.momentum=}', False, (0, 0, 0))

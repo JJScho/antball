@@ -1,16 +1,14 @@
 import pygame.sprite
-
+image = pygame.image.load('ball.png')
 import consts
-
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self,name, rect:pygame.Rect, momemtum:pygame.Vector2):
         super(Ball, self).__init__()
         self.name = name
-        self.image = pygame.image.load('ball.png')
+        self.image = image
         self.rect = rect
         self.momentum = momemtum
-
 
 
     def update(self):
@@ -20,23 +18,24 @@ class Ball(pygame.sprite.Sprite):
 
         self.rect.move_ip(self.momentum[0], self.momentum[1])
 
-        if self.rect.bottom > consts.SCREEN_WIDE:
-            self.rect.bottom = consts.SCREEN_WIDE
-            self.bounce(horizontal=False)
+        if self.rect.bottom > consts.SCREEN_HEIGHT:
+            self.rect.bottom = consts.SCREEN_HEIGHT
+            self.wall_bounce(horizontal=False)
         if self.rect.top < 0:
             self.rect.top = 0
-            self.bounce(horizontal=False)
+            self.wall_bounce(horizontal=False)
         if self.rect.left < 0:
             self.rect.left = 0
-            self.bounce()
+            self.wall_bounce()
         if self.rect.right > consts.SCREEN_WIDTH:
             self.rect.right = consts.SCREEN_WIDTH
-            self.bounce()
+            self.wall_bounce()
 
     def get_name(self):
         return self.name
 
-    def bounce(self, horizontal=True):
+    def wall_bounce(self, horizontal=True):
+        '''moet vectors gebruiken'''
         energy_loss = -0.9
         if horizontal:
             self.momentum[0] = self.momentum[0] * energy_loss
