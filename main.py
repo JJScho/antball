@@ -20,7 +20,7 @@ ball_1 = ball.Ball('Jerry',pygame.Rect( 300, 300, 24, 24), pygame.Vector2(15, 1)
 ball_2 = ball.Ball('Fred', pygame.Rect(799, 799, 24, 24), pygame.Vector2(20, 20))
 ball_3 = ball.Ball('Hank', pygame.Rect(5, 5, 24, 24), pygame.Vector2(40, 40))
 
-flipper_1 = flipper.Flipper(pygame.Rect( 500, 500, 24, 24))
+flipper_1 = flipper.Flipper(pygame.Rect(500, 500, 24, 24))
 
 ball_group = pygame.sprite.Group()
 flipper_group = pygame.sprite.Group()
@@ -43,9 +43,10 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LSHIFT:
                 flipper_1.flipping = True
-            else:
-                print('geen')
-                flipper_1.flipping = False
+
+
+        if event.type == pygame.KEYUP:
+            flipper_1.flipping = False
 
 
     screen.fill(c.WHITE)
